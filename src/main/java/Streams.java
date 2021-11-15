@@ -52,7 +52,22 @@ public class Streams {
      * @implNote Ein InputStream gibt <code>-1</code> bei einer {@link InputStream#read()} zurück, wenn das Ende erreicht wurde
      */
     public boolean writeInputToOutput(InputStream is, OutputStream os) {
-        return false;
+        int size = 16384, n;
+        byte[] puffer = new byte[size];
+        try {
+            n = is.readNBytes(puffer, 0, size);
+        } catch (IOException ioException) {
+            return false;
+        }
+        while (n != 0) {
+            try {
+                os.write(puffer, 0, n);
+                n = is.readNBytes(puffer, 0, size);
+            } catch (IOException ioException) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
