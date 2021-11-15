@@ -60,7 +60,6 @@ public class Main {
     private static void test_writeUTF8TextToStream(Streams s) {
         String data = "~~~ ╔͎═͓═͙╗\n~~~ ╚̨̈́═̈́﴾ ̥̂˖̫˖̥  ̂ )";
         byte[] backup = new byte[]{126, 126, 126, 32, -30, -107, -108, -51, -114, -30, -107, -112, -51, -109, -30, -107, -112, -51, -103, -30, -107, -105, 10, 126, 126, 126, 32, -30, -107, -102, -51, -124, -52, -88, -30, -107, -112, -51, -124, -17, -76, -66, 32, -52, -126, -52, -91, -53, -106, -52, -85, -53, -106, -52, -91, -30, -128, -118, -30, -128, -118, -52, -126, -30, -128, -118, 41};
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         boolean rv = s.writeUTF8TextToStream(data, baos);
         System.out.println("writeUTF8TextToStream: " + (Arrays.equals(backup, baos.toByteArray()) && rv));

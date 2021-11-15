@@ -1,7 +1,7 @@
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.*;
 
 /**
  * Diese Klasse enthält Methoden zur Verarbeitung von Streams
@@ -151,6 +151,11 @@ public class Streams {
      * @return Den ausgelesenen Wert. Oder {@link Double#NaN}, wenn dieser nicht existert oder ein Fehler aufgetreten ist.
      */
     public double parseParam2(String text) {
+        String[] tokens = text.split("\\s+");
+        for(int i = 0; i < tokens.length; ++i) {
+            if(tokens[i].equals("--param2"))
+                return Double.parseDouble(tokens[i + 1]);
+        }
         return Double.NaN;
     }
 
@@ -160,7 +165,7 @@ public class Streams {
      * @return den erzeugten {@link BufferedReader}
      */
     public BufferedReader asBufferedReader(InputStream is) {
-        return null;
+        return new BufferedReader(new InputStreamReader(is));
     }
 
     /**
@@ -177,7 +182,17 @@ public class Streams {
      * @implNote Achten Sie darauf, dass die Methode keine {@link Exception} wirft, falls eine Zeile mal etwas anderes als eine Zahl oder den Text <code>end</code> enthält.
      */
     public long sum(BufferedReader br) {
-        return 0;
+        long res = 0;
+        try {
+            for(String line; (line = br.readLine()) != null;) {
+                if(line.equals("end"))
+                    return res;
+                res += Long.parseLong(line);
+            }
+        } catch (IOException ioException) {
+            return res;
+        }
+        return res;
     }
 
     /**
@@ -194,6 +209,19 @@ public class Streams {
      * @see java.util.ArrayList
      */
     public List<Integer> getIntList(BufferedReader br) {
-        return null;
+        List<Integer> res = new ArrayList<>();
+        try {
+            for(String line; (line = br.readLine()) != null;) {
+                if(line.equals("end"))
+                    return res;
+                for(String i : line.split("\\s+"))
+                    try {
+                        res.add(Integer.parseInt(i));
+                    } catch (NumberFormatException ignored) {} // no better way to check if it's an integer (.isalnum()-alike)
+            }
+        } catch (IOException ioException) {
+            return res;
+        }
+        return res;
     }
 }
