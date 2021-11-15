@@ -80,10 +80,10 @@ public class Streams {
     public boolean writeUTF8TextToStream(String text, OutputStream os) {
         try {
             os.write(text.getBytes(StandardCharsets.UTF_8));
+            return true;
         } catch (IOException ioException) {
             return false;
         }
-        return true;
     }
 
     /**
@@ -96,10 +96,10 @@ public class Streams {
     public boolean writeEncodedTextToStream(String text, Charset encoding, OutputStream os) {
         try {
             os.write(text.getBytes(encoding));
+            return true;
         } catch (IOException ioException) {
             return false;
         }
-        return true;
     }
 
     /**
