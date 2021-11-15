@@ -78,6 +78,11 @@ public class Streams {
      * @see StandardCharsets#UTF_8
      */
     public boolean writeUTF8TextToStream(String text, OutputStream os) {
+        try {
+            os.write(text.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException ioException) {
+            return false;
+        }
         return false;
     }
 
@@ -89,6 +94,11 @@ public class Streams {
      * @return <code>true</code> bei Erfolg, sonst <code>false</code>
      */
     public boolean writeEncodedTextToStream(String text, Charset encoding, OutputStream os) {
+        try {
+            os.write(text.getBytes(encoding));
+        } catch (IOException ioException) {
+            return false;
+        }
         return false;
     }
 
@@ -98,6 +108,7 @@ public class Streams {
      * @return den erzeugten {@link PrintStream}
      */
     public PrintStream asPrintStream(OutputStream os) {
+
         return null;
     }
 
