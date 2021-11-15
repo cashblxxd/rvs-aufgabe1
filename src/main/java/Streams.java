@@ -130,8 +130,8 @@ public class Streams {
         }
         while (n != 0) {
             try {
-                os.write(puffer);
-                n = is.readNBytes(puffer, 0, size);
+                os.write(puffer, 0, n);
+                n = is.readNBytes(puffer, 0, n);
             } catch (IOException ioException) {
                 return false;
             }
