@@ -108,8 +108,7 @@ public class Streams {
      * @return den erzeugten {@link PrintStream}
      */
     public PrintStream asPrintStream(OutputStream os) {
-
-        return null;
+        return new PrintStream(os);
     }
 
     /**
