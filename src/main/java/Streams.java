@@ -83,7 +83,7 @@ public class Streams {
         } catch (IOException ioException) {
             return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -99,7 +99,7 @@ public class Streams {
         } catch (IOException ioException) {
             return false;
         }
-        return false;
+        return true;
     }
 
     /**
