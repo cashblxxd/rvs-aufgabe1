@@ -16,7 +16,12 @@ public class Streams {
      * @return <code>true</code> bei Erfolg, sonst <code>false</code>
      */
     public boolean writeArrayToStream(byte[] data, OutputStream os) {
-        return false;
+        try {
+            os.write(data);
+        } catch (IOException ioException) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -29,7 +34,13 @@ public class Streams {
      * @return <code>true</code> bei Erfolg, sonst <code>false</code>
      */
     public boolean writeArrayToStream(byte[] data, int offset, int length, OutputStream os) {
-        return false;
+        for(int i = offset; i < offset + length; ++i)
+            try {
+                os.write(data[i]);
+            } catch (IOException ioException) {
+                return false;
+            }
+        return true;
     }
 
     /**
