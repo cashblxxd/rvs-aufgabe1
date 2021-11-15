@@ -120,7 +120,23 @@ public class Streams {
      * @see PrintStream#checkError()
      */
     public boolean writeToPrintStream(PrintStream os, String text, InputStream is) {
-        return false;
+        os.println(text);
+        int size = 16384, n;
+        byte[] puffer = new byte[size];
+        try {
+            n = is.readNBytes(puffer, 0, size);
+        } catch (IOException ioException) {
+            return false;
+        }
+        while (n != 0) {
+            try {
+                os.write(puffer);
+                n = is.readNBytes(puffer, 0, size);
+            } catch (IOException ioException) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
